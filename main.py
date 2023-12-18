@@ -1,22 +1,45 @@
 from urllib import error
-from flask import Flask, request
+from flask import Flask, request, redirect, url_for
 
 app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
-
 def generateResponse():
-    try:
-        if request.method == 'GET':
-            return "<h1>Hola esto es un texto generado de prueba</h1>"
-    except error.HTTPError as err:
-        
-        match err.code:
-            case 404:
-                return "<h1>Hi, you are not supose to be here</h1>"
-            case 401:
-                return "<h1>Not autorized</h1>"
     
+    if request.method == 'GET':
+        return """<h1>INICIO</h1>
+                    <p>Lorem ipsum sir amet</p>
+                """
+
+
+@app.route('/profile', methods=["GET"])
+def profile():
+    devices = ["iphone", "android"]
+
+    #print(request.headers["User-Agent"])
+    agent = request.headers.get("User-Agent")
+
+    if devices[0] in agent.lower():
+        return """<p>Listado de perfiles</p>
+                    <ul>
+                        <li>Admin</li>
+                        <li>Root</li>
+                    </ul>"""
+    else:
+        return redirect("\\")
+
+@app.errorhandler(404)
+def err404(error):
+    return "<h2>Ups, ha sucedido algo raro</h2>"
+
+@app.errorhandler(402)
+def err404(error):
+    return "<h2>Ups, ha sucedido algo raro</h2>"
+
+@app.errorhandler(404)
+def err404(error):
+    return "<h2>Ups, ha sucedido algo raro</h2>"
+
 
 if __name__ == "__main__" :
     app.run(host='0.0.0.0')
