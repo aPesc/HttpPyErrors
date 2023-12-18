@@ -28,12 +28,12 @@ def profile():
     else:
         return redirect("\\")
 
-@app.errorhandler(404)
-def err404(error):
+@app.errorhandler(401)
+def err401(error):
     return "<h2>Ups, ha sucedido algo raro</h2>"
 
-@app.errorhandler(402)
-def err404(error):
+@app.errorhandler(403)
+def err403(error):
     return "<h2>Ups, ha sucedido algo raro</h2>"
 
 @app.errorhandler(404)
