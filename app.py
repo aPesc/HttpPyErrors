@@ -1,5 +1,5 @@
 import json
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, redirect, render_template, jsonify
 
 app = Flask(__name__)
 
@@ -22,14 +22,10 @@ def index():
             'pwd': "passw0rd"
         }
 
-        with open('output.json', "w") as jfile:
+        with open('output.json', "a") as jfile:
             json.dump(data, jfile, indent=2)
         
-        #return make_response(f"<p>La incidencia en la fecha {fecha} a nombre de {nombre} con el siguiente asunto: {asunto}</p> <br> <p>Sera procesado</p>", 201)
         return "Incidencia enviada, para consultar incidencias ve a su respectivo apartado"
-
-
-
 
 @app.route('/profile', methods=["GET"])
 def profile():
@@ -48,6 +44,20 @@ def profile():
     else:
         return redirect("\\")
 
+@app.route('/incidencias', methods=["GET"])
+def incidencias():
+    if request.method == "GET":
+        if open("./output.json","r") :
+            
+            with open("./output.json","r") as fil:  
+                lstIncidencias = json.load(fil)
+
+            #return render_template("incidencias.html", lstIncidencias = lstIncidencias)
+            return open("./output.json", "r") 
+        
+        else : return render_template("index.html")
+    
+    
 
 
 @app.errorhandler(401)
