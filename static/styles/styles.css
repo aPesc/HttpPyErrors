@@ -54,3 +54,9 @@ menu > a {
     height: 2em;
     background-color: rgb(0, 217, 255);
 }
+
+body h3 {
+    text-align: center;
+    width: 100%;
+    color: #404040;
+}

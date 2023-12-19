@@ -1,8 +1,8 @@
-# HttpPyErrors
+# HttpPyTicketing
 ![Static Badge](https://img.shields.io/badge/Language-Python-yellow)
-![Static Badge](https://img.shields.io/badge/Version-0.1-blue)
+![Static Badge](https://img.shields.io/badge/Version-0.8-blue)
 
-An API with the real purpose of sending a html response via an Http request.
+An API for a ticket system, using Flask framework.
 
 
 
