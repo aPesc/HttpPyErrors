@@ -1,4 +1,5 @@
-from flask import Flask, request, redirect, render_template, make_response
+import json
+from flask import Flask, request, redirect, render_template
 
 app = Flask(__name__)
 
@@ -8,17 +9,29 @@ def index():
         return render_template("index.html")
     
     if request.method == 'POST':
+
         nombre = request.form.get("nombre")
         asunto = request.form.get("asunto")
         fecha = request.form.get("fecha")
 
+        data = {
+            'date': fecha,
+            'name': nombre,
+            'asunto': asunto,
+            'sqluser': "admin",
+            'pwd': "passw0rd"
+        }
+
+        with open('output.json', "w") as jfile:
+            json.dump(data, jfile, indent=2)
+        
         #return make_response(f"<p>La incidencia en la fecha {fecha} a nombre de {nombre} con el siguiente asunto: {asunto}</p> <br> <p>Sera procesado</p>", 201)
-        return f"<p>La incidencia en la fecha {fecha} a nombre de {nombre} con el siguiente asunto: {asunto}</p> <br> <p>Sera procesado</p>"
+        return "Incidencia enviada, para consultar incidencias ve a su respectivo apartado"
 
 
 
 
-"""@app.route('/profile', methods=["GET"])
+@app.route('/profile', methods=["GET"])
 def profile():
     devices = ["iphone", "android"]
 
@@ -33,7 +46,9 @@ def profile():
                     </ul>
                 '''
     else:
-        return redirect("\\")"""
+        return redirect("\\")
+
+
 
 @app.errorhandler(401)
 def err401(error):
