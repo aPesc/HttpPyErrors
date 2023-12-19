@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Incidencias</title>
+    <title>Portal</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/styles.css') }}">
 </head>
 <body>
@@ -12,12 +12,10 @@
         <a href="/incidencias">Incidencias</a>
         <a href="/admin" hidden>Admin</a>
     </menu>
-
-    <h1>Historial de incidencias</h1>
-
-    {% for incident in lstIncidencias %}
-        <ul>{{ incident }} </ul>
-    {% endfor %}
+    
+    <article>
+        <p>{{ message }}</p>
+    </article>
 
 </body>
 </html>

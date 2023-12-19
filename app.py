@@ -1,4 +1,5 @@
 import json
+import os
 from flask import Flask, request, redirect, render_template, jsonify
 
 app = Flask(__name__)
@@ -10,22 +11,21 @@ def index():
     
     if request.method == 'POST':
 
-        nombre = request.form.get("nombre")
+        titulo = request.form.get("titulo")
         asunto = request.form.get("asunto")
         fecha = request.form.get("fecha")
 
         data = {
             'date': fecha,
-            'name': nombre,
+            'titulo': titulo,
             'asunto': asunto,
             'sqluser': "admin",
             'pwd': "passw0rd"
         }
 
-        with open('output.json', "a") as jfile:
-            json.dump(data, jfile, indent=2)
+        if setJsonData("output.json", data):
         
-        return "Incidencia enviada, para consultar incidencias ve a su respectivo apartado"
+            return render_template("base.html", message = "Incidencia enviada, para consultar incidencias ve a su respectivo apartado")
 
 @app.route('/profile', methods=["GET"])
 def profile():
@@ -47,15 +47,12 @@ def profile():
 @app.route('/incidencias', methods=["GET"])
 def incidencias():
     if request.method == "GET":
-        if open("./output.json","r") :
-            
-            with open("./output.json","r") as fil:  
-                lstIncidencias = json.load(fil)
-
-            #return render_template("incidencias.html", lstIncidencias = lstIncidencias)
-            return open("./output.json", "r") 
+        lstIncidencias = list()
+        lstIncidencias = getJsonData("output.json")
+        return render_template("incidencias.html", lstIncidencias = lstIncidencias)
+        #return open("./output.json", "r") 
         
-        else : return render_template("index.html")
+    else: return render_template("index.html")
     
     
 
@@ -71,6 +68,28 @@ def err403(error):
 @app.errorhandler(404)
 def err404(error):
     return render_template("errcode.html")
+
+
+def getJsonData(file: str) -> list:
+
+    with open(file,"r") as jfile:
+        lst = json.load(jfile)
+        return lst
+    
+
+def setJsonData(file: str, adment):
+    lst = list()
+
+    if os.path.exists(file):
+        lst = getJsonData(file)
+
+    lst.append(adment)
+
+    with open(file,"w") as jfile:
+        json.dump(lst, jfile, indent=2)
+        
+        return True
+
 
 
 if __name__ == "__main__" :

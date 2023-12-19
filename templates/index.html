@@ -8,18 +8,24 @@
     <!--<link rel="stylesheet" href="/static/styles/styles.css">-->
 </head>
 <body>
+    <menu>
+        <a href="/">Inicio</a>
+        <a href="/incidencias">Incidencias</a>
+        <a href="/admin" hidden>Admin</a>
+    </menu>
+
     <h1>Sistema de ticketing</h1>
     <form method="post">
 
         <div class="form-content">
             <label for="fecha">Fecha</label>
-            <input type="date" name="fecha" id="fec"/>
+            <input type="date" name="fecha" id="fec" required/>
             
-            <label for="nombre">Nombre</label>
-            <input type="text" name="nombre" id="nom"/>
+            <label for="titulo">Titulo</label>
+            <input type="text" name="titulo" id="tit" required/>
             
             <label for="asunto">Asunto</label>
-            <input type="text" size="30" name="asunto" id="asunt"/>
+            <textarea name="asunto" id="asunt"  required maxlength="300" cols="35" rows="7" placeholder="Asunto a tratar" /></textarea>
             <br>
             <button type="submit" class="btn">Enviar</button>
         </div>        
