@@ -14,9 +14,10 @@
     </menu>
 
     <h1>Historial de incidencias</h1>
-    {% if lstIncidencias > 0 %}
+    
+    {% if lstIncidencias|length > 0 %}
         {% for incident in lstIncidencias %}
-            <ul>{{ incident }} </ul>
+            <ul class="ticket">{{ incident }} </ul>
         {% endfor %}
     {% else %}
         <h3>Actualmente no hay incidencias</h3>

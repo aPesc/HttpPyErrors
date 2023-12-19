@@ -1,6 +1,6 @@
 import json
 from os import path
-from flask import Flask, request, redirect, render_template, jsonify
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
@@ -20,7 +20,7 @@ def index():
             'titulo': titulo,
             'asunto': asunto,
             'key': "SVAvYWRtaW4tPmZsYWc=", #Ip/admin->flag
-            'key2': ""
+            'key2': "WnViaXJpMjMyNEp1c3RQYXN0ZU1lU29tZXdoZXJl" 
         }
 
         if setJsonData("output.json", data):
@@ -36,10 +36,13 @@ def incidencias():
 
 @app.route('/admin', methods=["GET", "POST"])
 def admin():
-    if request.method == "GET": return ""
+    if request.method == "GET": return render_template("admin.html", result=0)
 
     if request.method == "POST":
-        ...
+        key = request.form.get("key")
+
+        if key == "Zubiri2324JustPasteMeSomewhere":
+            return render_template("admin.html",result = 1)
 
 @app.errorhandler(401)
 def err401(error):
@@ -61,7 +64,6 @@ def getJsonData(file: str) -> list:
             return lst
     
     return 0
-    
 
 def setJsonData(file: str, adment):
     lst = list()
