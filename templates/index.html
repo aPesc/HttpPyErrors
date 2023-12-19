@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de incidencias</title>
+    <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0%;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 1em;
+        }
+
+        .form-content {
+            width: fit-content;
+            height: fit-content;
+            align-items: center;
+            
+            padding: 1em;
+            border: 1px solid black;
+        }
+
+        .form-content > * {
+            display: block;
+            margin: 5px 0 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sistema de ticketing</h1>
+    <form method="post">
+
+        <div class="form-content">
+            <label for="fecha">Fecha</label>
+            <input type="date" name="fecha" id="fec"/>
+            
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" id="nom"/>
+            
+            <label for="asunto">Asunto</label>
+            <input type="text" size="30" name="asunto" id="asunt"/>
+        </div>
+
+        <br>
+        <button type="submit">Enviar</button>
+
+    </form>
+</body>
+</html>
