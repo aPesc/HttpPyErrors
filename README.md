@@ -1,6 +1,6 @@
 # HttpPyTicketing
 ![Static Badge](https://img.shields.io/badge/Language-Python-yellow)
-![Static Badge](https://img.shields.io/badge/Version-0.8-blue)
+![Static Badge](https://img.shields.io/badge/Version-1.0-blue)
 
 An API for a ticket system, using Flask framework.
 
