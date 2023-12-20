@@ -32,7 +32,9 @@ def incidencias():
     if request.method == "GET":
         lstIncidencias = list()
         lstIncidencias = getJsonData("output.json")
-        return render_template("incidencias.html", lstIncidencias = lstIncidencias)
+
+        if lstIncidencias : return render_template("incidencias.html", lstIncidencias = lstIncidencias)
+        else: return render_template("incidencias.html", lstIncidencias = 0)
 
 @app.route('/admin', methods=["GET", "POST"])
 def admin():
